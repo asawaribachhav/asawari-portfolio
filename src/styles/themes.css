@@ -1,0 +1,83 @@
+/**
+ * Semantic color tokens. Dark is the default and lives on :root directly
+ * (not gated behind a .dark class) so the site is never unstyled or
+ * light-flashed before JS attaches a class. .light overrides on top when
+ * the user (or a future toggle) opts in. next-themes still adds/removes
+ * .dark for consistency with its own conventions, but the fallback state
+ * if that class is ever absent is dark — matching "dark by default"
+ * structurally, not just as an initial prop.
+ */
+
+:root,
+.dark {
+  --background: 200 18% 7%;        /* #0C1013 deep blue-charcoal, not pure black */
+  --surface: 200 16% 10%;          /* #14181C card/panel background */
+  --surface-raised: 200 14% 13%;   /* #1A1F24 hover/elevated state */
+  --text: 90 10% 95%;              /* #F1F3EF warm off-white, not pure #FFF */
+  --muted: 205 8% 62%;             /* #9AA3AA de-emphasized text */
+  --muted-bg: 200 14% 13%;         /* de-emphasized surface (chips, disabled fields) */
+
+  --primary: 165 55% 58%;          /* #52D1AA brand teal, brightened for dark bg */
+  --primary-foreground: 200 18% 7%;
+
+  --success: 142 55% 55%;          /* #4ED67F distinct hue from primary — reserved for
+                                       positive data deltas, not reused as decoration */
+  --success-foreground: 200 18% 7%;
+
+  --warning: 38 85% 60%;           /* #EFA23D negative deltas, cautionary states */
+  --warning-foreground: 200 18% 7%;
+
+  --border: 200 12% 18%;           /* hairlines, dividers, chart gridlines */
+  --focus-ring: 165 55% 58%;
+
+  --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.24);
+  --shadow-md: 0 4px 12px -2px hsl(0 0% 0% / 0.36), 0 2px 4px -2px hsl(0 0% 0% / 0.24);
+  --shadow-lg: 0 12px 32px -4px hsl(0 0% 0% / 0.44), 0 4px 8px -2px hsl(0 0% 0% / 0.28);
+}
+
+.light {
+  --background: 90 8% 96%;         /* #F7F8F6 */
+  --surface: 0 0% 100%;            /* #FFFFFF */
+  --surface-raised: 90 8% 98%;
+  --text: 200 13% 9%;              /* #14181B */
+  --muted: 205 9% 39%;             /* #5B6570 */
+  --muted-bg: 90 8% 98%;
+
+  --primary: 165 41% 30%;          /* #2E6F5E deeper on light bg, same hue as dark mode */
+  --primary-foreground: 90 8% 98%;
+
+  --success: 142 45% 32%;
+  --success-foreground: 90 8% 98%;
+
+  --warning: 32 70% 42%;
+  --warning-foreground: 90 8% 98%;
+
+  --border: 100 10% 89%;           /* #E4E7E2 */
+  --focus-ring: 165 41% 30%;
+
+  --shadow-sm: 0 1px 2px 0 hsl(200 13% 9% / 0.04);
+  --shadow-md: 0 2px 8px -2px hsl(200 13% 9% / 0.08), 0 1px 2px -1px hsl(200 13% 9% / 0.04);
+  --shadow-lg: 0 8px 24px -4px hsl(200 13% 9% / 0.10), 0 2px 6px -2px hsl(200 13% 9% / 0.05);
+}
+
+/* ===== shadcn compatibility bridge =====
+   shadcn's generated components (via `npx shadcn add`) expect these exact
+   variable names. Rather than editing every generated component to use our
+   semantic names, we map once here. shadcn's `destructive` aligns to our
+   `warning`, since this system uses success/warning rather than a
+   success/destructive pairing. */
+:root {
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --muted-foreground: var(--muted);
+  --accent: var(--surface-raised);
+  --accent-foreground: var(--text);
+  --destructive: var(--warning);
+  --destructive-foreground: var(--warning-foreground);
+  --input: var(--border);
+  --ring: var(--focus-ring);
+  --radius: var(--radius-md);
+}
